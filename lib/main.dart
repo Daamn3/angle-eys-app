@@ -29,7 +29,7 @@ class _RestaurantIpPageState extends State<RestaurantIpPage> {
   Future<void>ipaddress() async{
     final ipc=_ipController.text.trim();
     SharedPreferences sp=await SharedPreferences.getInstance();
-    final url='$ipc:8000';
+    final url='http://$ipc:8000';
     print('$ipc');
     sp.setString('ip', url);
     Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));

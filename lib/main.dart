@@ -1,3 +1,4 @@
+import 'package:angeleyesapp/blind_home.dart';
 import 'package:angeleyesapp/login.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,9 +10,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Angel Eyes',
       theme: ThemeData(
-        primarySwatch: Colors.teal,
+        primarySwatch: Colors.cyan,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: RestaurantIpPage(),
@@ -32,7 +34,7 @@ class _RestaurantIpPageState extends State<RestaurantIpPage> {
     final url='http://$ipc:8000';
     print('$ipc');
     sp.setString('ip', url);
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>BlindHome()));
 
 
   }

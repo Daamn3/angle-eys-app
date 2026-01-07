@@ -50,7 +50,7 @@ class _RegisterState extends State<Register> {
               });
             }),
             TextFormField(decoration: InputDecoration(labelText: 'Place',hintText: 'enter your place'),controller: place,),
-            TextFormField(decoration: InputDecoration(labelText: 'Post',hintText: 'enter your place'),controller: post,),
+            TextFormField(decoration: InputDecoration(labelText: 'Post',hintText: 'enter your Postal area'),controller: post,),
             TextFormField(decoration: InputDecoration(labelText: 'pin',hintText: 'enter your pin'),controller: pin,),
             TextFormField(decoration: InputDecoration(labelText: 'phone Number',hintText: 'enter your phone number'),controller: phone,),
             ElevatedButton(onPressed: image, child: Text('Select photo')),

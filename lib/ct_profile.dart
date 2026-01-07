@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:angeleyesapp/Editprof.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -13,11 +14,12 @@ class ct_profile extends StatefulWidget {
 
 class _ct_profileState extends State<ct_profile> {
   @override
+
   void initState() {
-    // TODO: implement initState
     super.initState();
     profile();
   }
+
   String? a;
   String? fname;
   String? lname;
@@ -29,35 +31,36 @@ class _ct_profileState extends State<ct_profile> {
   String? email;
   String? photo;
 
-
-  Future<void>profile()async {
+  Future<void> profile() async {
     SharedPreferences sh = await SharedPreferences.getInstance();
     final lid = sh.getString('lid');
     final url = sh.getString('ip');
-    a=url;
-  final res = await http.post(Uri.parse('$url/myapp/pro_det/'), body:
-  {
-  'lid': lid
-  });
+    a = url;
 
-  final data = json.decode(res.body);
-  print(data);
-  setState(() {
+    final res = await http.post(
+      Uri.parse('${url!}/myapp/pro_det/'),
+      body: {
+        'lid': lid!,
+      },
+    );
 
-    fname=data['fname'];
-    lname=data['lname'];
-    gender=data['gender'];
-    place=data['place'];
-    post=data['post'];
-    pin=data['pin'].toString();
-    phone=data['phone'];
-    email=data['email'];
-    photo=data['photo'];
+    final data = json.decode(res.body);
+    print(data);
 
+    setState(() {
+      fname = data['fname'];
+      lname = data['lname'];
+      gender = data['gender'];
+      place = data['place'];
+      post = data['post'];
+      pin = data['pin'].toString();
+      phone = data['phone'].toString();
+      email = data['email'];
+      photo = data['photo'];
     });
   }
 
-
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -77,6 +80,9 @@ class _ct_profileState extends State<ct_profile> {
               Text('Email : $email'),
               Image.network('$a$photo'),
 
+              ElevatedButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Editprof()));
+              },child: const Text('Edit Profile')),
             ],
           ),
         ),

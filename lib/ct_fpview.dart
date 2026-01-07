@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:angeleyesapp/ct_addfp.dart';
 import 'package:angeleyesapp/ct_editbp.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -7,13 +8,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'ct_addbp.dart';
 import 'ct_home.dart';
 
-class ct_bpmanage extends StatelessWidget {
-  const ct_bpmanage({super.key});
+class ct_fpview extends StatelessWidget {
+  const ct_fpview({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'manage blind person',
+      title: 'manage familiar person',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -46,7 +47,7 @@ class _ViewBlindPersonsState extends State<ViewBlindPersons> {
       String baseUrl = prefs.getString('ip') ?? '';
       String lid = prefs.getString('lid') ?? '';
 
-      String apiUrl = '$baseUrl/myapp/viewbp/';
+      String apiUrl = '$baseUrl/myapp/viewfp/';
 
       var response = await http.post(Uri.parse(apiUrl), body: {
         'lid': lid,
@@ -59,9 +60,9 @@ class _ViewBlindPersonsState extends State<ViewBlindPersons> {
 
           for (var item in jsonData['data']) {
             tempList.add({
-              'id': item['id'],
+              'BLIND': item['BLIND'],
               'name': item['name'],
-              'imei': item['imei'],
+              'relation': item['relation'],
               'place': item['place'],
               'post': item['post'],
               'pin': item['pin'],
@@ -92,7 +93,7 @@ class _ViewBlindPersonsState extends State<ViewBlindPersons> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String baseUrl = prefs.getString('ip') ?? '';
 
-      String apiUrl = '$baseUrl/myapp/delete_blind/';
+      String apiUrl = '$baseUrl/myapp/delete_fp/';
 
       var response = await http.post(
         Uri.parse(apiUrl),
@@ -123,7 +124,7 @@ class _ViewBlindPersonsState extends State<ViewBlindPersons> {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         title: const Text(
-          'History',
+          'familiar person',
           style: TextStyle(color: Colors.white),
         ),
         leading: BackButton(
@@ -140,7 +141,7 @@ class _ViewBlindPersonsState extends State<ViewBlindPersons> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => addbp()),
+                MaterialPageRoute(builder: (context) => addfp()),
               );
             },
             icon: const Icon(Icons.add),
@@ -182,8 +183,9 @@ class _ViewBlindPersonsState extends State<ViewBlindPersons> {
                   )
                       : const SizedBox(),
                   const SizedBox(height: 10),
+                  Text("BLIND: ${item['BLIND']}"),
                   Text("name: ${item['name']}"),
-                  Text("imei: ${item['imei']}"),
+                  Text("relation: ${item['relation']}"),
                   Text("place: ${item['place']}"),
                   Text("post: ${item['post']}"),
                   Text("pin: ${item['pin']}"),

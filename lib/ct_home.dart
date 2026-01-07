@@ -4,6 +4,7 @@ import 'package:angeleyesapp/ct_bpmanage.dart';
 import 'package:angeleyesapp/ct_complaints.dart';
 import 'package:angeleyesapp/ct_emergency.dart';
 import 'package:angeleyesapp/ct_fpmanage.dart';
+import 'package:angeleyesapp/ct_fpview.dart';
 import 'package:angeleyesapp/ct_location.dart';
 import 'package:angeleyesapp/ct_profile.dart';
 import 'package:flutter/material.dart';
@@ -77,11 +78,12 @@ String? img;
             ElevatedButton(onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>ct_complaints()));
             },child: const Text('view complaints')),
+
             ElevatedButton(onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>ct_emergency()));
             },child: const Text('Emergency')),
             ElevatedButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>ct_fpmanage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ct_fpview()));
             },child: const Text('Manage Familiar Person')),
             ElevatedButton(onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>ct_location()));
